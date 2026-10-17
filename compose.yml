@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: finly-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: finly
+      POSTGRES_USER: finly
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - finly-data:/var/lib/postgresql/data
+
+volumes:
+  finly-data:

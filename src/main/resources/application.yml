@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: Finly
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/finly
+    username: finly
+    password: ${DB_PASSWORD}
+
+  flyway:
+    enabled: true
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
