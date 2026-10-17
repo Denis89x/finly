@@ -25,7 +25,6 @@ CREATE TABLE accounts (
                           user_id BIGINT NOT NULL REFERENCES users(id),
                           name VARCHAR(100) NOT NULL,
                           currency_code VARCHAR(3) NOT NULL REFERENCES currencies(code),
-                          initial_balance NUMERIC(19, 4) NOT NULL DEFAULT 0,
                           balance NUMERIC(19, 4) NOT NULL DEFAULT 0,
                           tracking_started_at DATE NOT NULL DEFAULT CURRENT_DATE,
                           is_archived BOOLEAN NOT NULL DEFAULT FALSE,
