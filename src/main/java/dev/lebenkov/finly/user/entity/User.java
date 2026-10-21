@@ -1,5 +1,6 @@
 package dev.lebenkov.finly.user.entity;
 
+import dev.lebenkov.finly.user.enumiration.Role;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -24,6 +25,10 @@ public class User {
 
     @Column(nullable = false, length = 254)
     String email;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    Role role;
 
     @Column(name = "password_hash", nullable = false, length = 255)
     String passwordHash;
