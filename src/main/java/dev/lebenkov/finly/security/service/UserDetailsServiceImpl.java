@@ -1,7 +1,6 @@
 package dev.lebenkov.finly.security.service;
 
 import dev.lebenkov.finly.user.entity.User;
-import dev.lebenkov.finly.user.repository.UserRepository;
 import dev.lebenkov.finly.user.service.UserReadService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Service;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    UserRepository userRepository;
     UserReadService userReadService;
 
     @Override
