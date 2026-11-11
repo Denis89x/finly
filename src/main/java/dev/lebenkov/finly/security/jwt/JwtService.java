@@ -38,11 +38,11 @@ public class JwtService {
         this.refreshExpiration = refreshExpiration;
     }
 
-    public String generateAccessToken(String username) {
+    public GeneratedToken generateAccessToken(String username) {
         return generateToken(username, ACCESS, accessExpiration);
     }
 
-    public String generateRefreshToken(String username) {
+    public GeneratedToken generateRefreshToken(String username) {
         return generateToken(username, REFRESH, refreshExpiration);
     }
 
@@ -54,18 +54,23 @@ public class JwtService {
         return isTokenValid(token, username, REFRESH);
     }
 
-    private String generateToken(
+    private GeneratedToken generateToken(
             String username,
             String tokenType,
             long expiration
     ) {
-        return Jwts.builder()
+        Instant now = Instant.now();
+        Instant expiresAt = now.plusMillis(expiration);
+
+        String token = Jwts.builder()
                 .subject(username)
                 .claim(TOKEN_TYPE_CLAIM, tokenType)
-                .issuedAt(Date.from(Instant.now()))
-                .expiration(Date.from(Instant.now().plusMillis(expiration)))
+                .issuedAt(Date.from(now))
+                .expiration(Date.from(expiresAt))
                 .signWith(secretKey)
                 .compact();
+
+        return new GeneratedToken(token, expiresAt);
     }
 
     public String extractUsernameFromAccessToken(String token) {
